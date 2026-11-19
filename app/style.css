@@ -186,9 +186,10 @@ button:hover { border-color: var(--amber); }
 .stage-panel { display: flex; flex-direction: column; gap: 14px; align-items: center; }
 
 #stage {
-  width: 100%;
+  max-width: 100%;
   max-height: 68vh;
-  object-fit: contain;
+  width: auto;
+  height: auto;
   border-radius: 10px;
   box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5);
   cursor: grab;
@@ -224,7 +225,7 @@ body.shot-cover .status,
 body.shot-cover .foot { display: none; }
 body.shot-cover .workspace { display: block; padding: 0; max-width: none; }
 body.shot-cover .stage-panel { background: none; border: 0; padding: 0; }
-body.shot-cover #stage { max-height: none; border-radius: 0; box-shadow: none; }
+body.shot-cover #stage { width: 100%; max-height: none; border-radius: 0; box-shadow: none; }
 
 @media (max-width: 860px) {
   .workspace { grid-template-columns: 1fr; }

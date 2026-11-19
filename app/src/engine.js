@@ -338,13 +338,13 @@ function paintCaption(ctx, grade, W, H, title, sub) {
 }
 
 function paintTag(ctx, grade, rect, text, unit) {
-  const fontSize = Math.max(11, unit * 15);
+  const fontSize = Math.max(11, unit * 2.6);
   ctx.font = `800 ${fontSize}px ${SUB_FONT}`;
   const padX = fontSize * 0.7;
   const width = ctx.measureText(text).width + padX * 2;
   const height = fontSize * 1.65;
-  const tx = rect.x + unit * 10;
-  const ty = rect.y + unit * 10;
+  const tx = rect.x + unit * 1.4;
+  const ty = rect.y + unit * 1.4;
   ctx.fillStyle = grade.tagBg;
   roundedRect(ctx, tx, ty, width, height, height * 0.28);
   ctx.fill();
