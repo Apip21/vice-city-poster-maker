@@ -1,5 +1,1 @@
-[
-  { "name": "1-cover.jpg", "query": "?shot=cover&photo=pier&caption=Sunset%20Heist", "w": 1080, "h": 1080 },
-  { "name": "2-editor.jpg", "query": "?shot=editor&photo=boulevard&caption=Boulevard%20Queen", "w": 1280, "h": 720 },
-  { "name": "3-cover.jpg", "query": "?shot=cover&photo=boulevard&caption=Boulevard%20Queen", "w": 1080, "h": 1080 }
-]
+[{"h":720,"name":"01-cover.jpg","query":"?shot=cover&size=wide&layout=trio&grade=sunset&photo=pier&title=Vice%20City%20Nights&sub=One%20city%2C%20no%20brakes","w":1280},{"h":800,"name":"02-editor.jpg","query":"?layout=trio&grade=sunset&photo=boulevard&title=Boulevard%20Queen&sub=Golden%20hour%2C%20every%20hour","w":1280},{"h":960,"name":"03-portrait.jpg","query":"?shot=cover&size=portrait&layout=quad&grade=neon&photo=boulevard&title=Neon%20Reckoning&sub=The%20city%20never%20sleeps%20in","w":768},{"h":900,"name":"04-square.jpg","query":"?shot=cover&size=square&layout=duo&grade=dusk&photo=pier&photoAll=1&title=Golden%20Hour%20Heist&sub=In%20by%20dusk%2C%20out%20by%20dawn","w":900}]
