@@ -10,13 +10,39 @@
 //
 // MAKEFUN_OUTPUT_DIR stands in for /output outside the grading container.
 
-import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import {
+  cpSync, existsSync, mkdirSync, readdirSync, rmSync, statSync, writeFileSync,
+} from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-app.ts';
 
 const repoRoot = fileURLToPath(new URL('.', import.meta.url));
 const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+
+// Pre-flight: fail loudly here, with the actual reason, rather than handing
+// in an entry the scorer would refuse. The gate wants an app/index.html and
+// 3–4 screenshots of at most 256 KiB each; both are cheap to verify before
+// anything is copied.
+function preflight(): void {
+  if (!existsSync(join(repoRoot, 'app', 'index.html'))) {
+    throw new Error('cannot hand in: app/index.html is missing');
+  }
+  const shotsDir = join(repoRoot, 'screenshots');
+  if (!existsSync(shotsDir)) {
+    throw new Error('cannot hand in: screenshots/ is missing from the repository');
+  }
+  const shots = readdirSync(shotsDir).filter((name) => !name.startsWith('.'));
+  if (shots.length < 3 || shots.length > 4) {
+    throw new Error(`cannot hand in: screenshots/ holds ${shots.length} files, the gate wants 3 or 4`);
+  }
+  for (const name of shots) {
+    const size = statSync(join(shotsDir, name)).size;
+    if (size > 262144) {
+      throw new Error(`cannot hand in: screenshots/${name} is ${size} bytes, over the 256 KiB cap`);
+    }
+  }
+}
 
 function deliverFolder(name: string): void {
   const from = join(repoRoot, name);
@@ -30,6 +56,7 @@ function deliverFolder(name: string): void {
   cpSync(from, to, { recursive: true });
 }
 
+preflight();
 mkdirSync(outputDir, { recursive: true });
 deliverFolder('app');
 deliverFolder('screenshots');
